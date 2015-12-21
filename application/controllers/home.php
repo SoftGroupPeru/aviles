@@ -13,6 +13,7 @@ class Home extends CI_Controller {
 			   }
          		$this->header['title']= "Aviles";
 				$this->header['url']= base_url();
+				$this->load->helper('cookie');
     }
 
 	public function index()
@@ -24,6 +25,8 @@ class Home extends CI_Controller {
 	{
 		$this->session->unset_userdata('logged_in');
 		$this->session->unset_userdata('msj');
+		delete_cookie('usu_r40');
+		delete_cookie('pass_r40');
 		session_destroy();
 		redirect('home', 'refresh');
 	}

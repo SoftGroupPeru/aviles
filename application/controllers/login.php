@@ -5,11 +5,9 @@ class Login extends CI_Controller {
  function __construct()
  {
    parent::__construct();
-   if($this->session->userdata('logged_in')) {
-      $session_data = $this->session->userdata('logged_in');
-      $this->data['username'] = $session_data['username'];
-    }
+   $this->load->model('usuario_model','Usuario',TRUE);
    $this->data['url']= base_url();
+   $this->load->helper(array('form'));
  }
 
  function index()
@@ -20,10 +18,37 @@ class Login extends CI_Controller {
    }
    else
    {
-     $this->load->helper(array('form'));
      $this->load->view('login_view',$this->data);
    }
 
  }
+
+ function recovery()
+ {
+   $this->load->view('recovery_view', $this->data);
+ }
+
+ function verify()
+ {
+   $email = $this->input->post('txtemail');
+   $result = $this->Usuario->recovery($email); //comprobamos si el correo existe
+
+   if($result) {
+     $sess_array = array();
+     $password = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,5);
+     $this->Usuario->update_password($result[0]->idUsuario, $password);
+     //echo $password;
+     /*
+     FALTA ENVIAR POR CORREO
+     */
+     $this->data['msj'] = [1, 'Su nueva contraseña se enviará a su correo.'];
+     $this->load->view('recovery_view', $this->data);
+   } else {
+     $this->data['msj'] = [2, 'El correo ingresado no existe.'];
+     $this->load->view('recovery_view', $this->data);
+   }
+
+ }
+
 
 }
