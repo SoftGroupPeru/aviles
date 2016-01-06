@@ -11,14 +11,17 @@ class Home extends CI_Controller {
 			   } else {
 			     redirect('login', 'refresh');
 			   }
-         		$this->header['title']= "Aviles";
+        $this->header['title']= "Aviles";
 				$this->header['url']= base_url();
 				$this->load->helper('cookie');
     }
 
 	public function index()
 	{
-		$this->load->view('v_inicio',$this->header);
+		$this->load->view('header_view',$this->header);
+		$this->load->view('aside_view');
+		$this->load->view('home_view');
+		$this->load->view('footer_view');
 	}
 
 	function logout()

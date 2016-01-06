@@ -55,4 +55,15 @@ Class Usuario_model extends CI_Model {
             ->update('Usuario');
  }
 
+ public function Listar(){
+   $this->db->select('idUsuario, usuario, correo, nombre, apellido, direccion, estado');
+   $this->db->from('usuario');
+   $consulta = $this->db->get();
+   $resultado = $consulta->result();
+   return $resultado;
+ }
+
+
+
+
 }
