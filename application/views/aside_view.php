@@ -25,7 +25,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">Mantenimiento</li>
-        <li class="active"><a href="<?php echo $url;?>usuarios">
+        <li class="active"><a href="<?php echo $url;?>usuario">
             <i class="fa fa-users"></i><span>Usuarios</span></a>
         </li>
         <li class="header">Navegacion</li>

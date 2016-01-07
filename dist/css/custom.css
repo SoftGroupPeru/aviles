@@ -5,3 +5,31 @@
     background-size: cover!important;
     background-repeat: no-repeat!important;
 }
+
+.overlay,
+.loading-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.overlay {
+  z-index: 1060;
+  background: rgba(255, 255, 255, 0.7);
+}
+.overlay.dark {
+  background: rgba(0, 0, 0, 0.5);
+}
+.loading-img {
+  z-index: 1070;
+  background: transparent url('../../images/ajax-loader1.gif') 50% 50% no-repeat;
+}
+
+.msjAlert {
+  position: fixed;
+  z-index: 1050;
+  top:87%;
+	left: 5%;
+  width: 90%;
+}

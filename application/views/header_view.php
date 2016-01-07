@@ -6,6 +6,9 @@
   <title>Sistema Admin - ALIPAT SAC</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <script>
+      var url = "<?php echo $url; ?>";
+    </script>
   <!-- Bootstrap 3.3.5 -->
   <link rel="stylesheet" href="<?php echo $url; ?>bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -22,6 +25,9 @@
         apply the skin class to the body tag so the changes take effect.
   -->
   <link rel="stylesheet" href="<?php echo $url; ?>dist/css/skins/skin-blue.min.css">
+  <!-- Custom style -->
+  <link rel="stylesheet" href="<?php echo $url; ?>dist/css/custom.css">
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

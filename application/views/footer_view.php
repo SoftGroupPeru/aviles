@@ -88,6 +88,8 @@
 
 <!-- jQuery 2.1.4 -->
 <script src="<?php echo $url; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
 <script src="<?php echo $url; ?>bootstrap/js/bootstrap.min.js"></script>
 <!-- DataTables -->
@@ -97,6 +99,14 @@
 <script src="<?php echo $url;?>plugins/datatables/dataTables.bootstrap.min.js"></script> -->
 <!-- AdminLTE App -->
 <script src="<?php echo $url; ?>dist/js/app.min.js"></script>
+<!-- Custom JS -->
+<?php if(isset($script)){
+    for ($i=0; $i < count($script); $i++) {
+      echo $script[$i];
+    }
+  } ?>
+
+<script src="<?php echo $url; ?>dist/js/custom.js"></script>
 <script>
       $(function () {
         $('#usuarios').DataTable({
@@ -135,6 +145,8 @@
         });
       });
     </script>
+
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the

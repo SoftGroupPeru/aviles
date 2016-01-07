@@ -56,14 +56,60 @@ Class Usuario_model extends CI_Model {
  }
 
  public function Listar(){
-   $this->db->select('idUsuario, usuario, correo, nombre, apellido, direccion, estado');
+   $this->db->select('idUsuario, usuario, correo, nombre, apellido, estado');
    $this->db->from('usuario');
    $consulta = $this->db->get();
    $resultado = $consulta->result();
    return $resultado;
  }
 
+ public function Insertar($data){
+   $arr = array(
+              'usuario' => $data['usuario'],
+              'clave' => $data['pass'],
+              'nombre' => $data['nombre'],
+              'apellido' => $data['apellido'],
+              'correo' => $data['correo'],
+              'estado' => $data['estado']
+              //'fecha_registro' => date("Y-m-d")  FALTA PONER FECHA DE REGISTRO EN LA BD
+           );
+   if($this->db->insert('usuario', $arr)) return true;
+   else return false;
+ }
 
+ public function Cargar($id){
+   $this->db->select('idUsuario, usuario, correo, nombre, apellido, estado');
+   $this->db->from('usuario');
+   $this->db->where('idUsuario', $id);
+   $this->db->limit(1);
+   $consulta = $this->db->get();
+   $resultado = $consulta->row();
+   return $resultado;
+ }
 
+ public function Editar($data){
+   $arr = array(
+         'usuario' => $data['usuario'],
+         'clave' => $data['pass'],
+         'nombre' => $data['nombre'],
+         'apellido' => $data['apellido'],
+         'correo' => $data['correo'],
+         'estado' => $data['estado']
+         //'fecha_registro' => date("Y-m-d")  FALTA PONER FECHA DE REGISTRO EN LA BD
+        );
+   $this->db->where('idUsuario', $data['id']);
+   if($this->db->update('usuario', $arr)) return true;
+   else return false;
+ }
+
+ public function activardesactivar($data){
+   $arr = array(
+         'estado' => $data['estado']
+         //'fecha_registro' => date("Y-m-d")  FALTA PONER FECHA DE REGISTRO EN LA BD
+        );
+   $this->db->where('idUsuario', $data['id']);
+   if($this->db->update('usuario', $arr)) return true;
+   else return false;
+ }
 
 }

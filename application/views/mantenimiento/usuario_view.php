@@ -21,11 +21,12 @@
               <div class="box box-success">
                 <div class="box-header">
                   <h3 class="box-title">Listado de Usuarios</h3>
-                  <a href="<?php echo $url;?>usuario/nuevo"><button type="button" class="btn btn-primary"><i class="fa fa-user-plus"></i> Agregar</button></a>
+                  <button type="button" class="btn btn-primary" onclick="Nuevo()">
+                    <i class="fa fa-user-plus"></i> Agregar
+                  </button>
                 </div><!-- /.box-header -->
-
                 <div class="box-body">
-                  <table id="usuarios" class="table table-bordered table-striped">
+                  <table id="t_usuarios" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>Nro</th>
@@ -33,14 +34,16 @@
                         <th>Correo</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
-                        <th>Dirección</th>
                         <th>Estado</th>
                         <th>Opciones</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tb_usuarios">
+
+
+
                       <?php
-                      $i = 1;
+                      /*$i = 1;
           					  foreach($arr_usuarios as $usuario) {
           						//  $fecha = date('d-m-Y', strtotime( $usuario->fecha_creacion));
                         if(($usuario->estado) == 1) $estado = '<button class="btn btn-block btn-success btn-sm" onclick="activardesactivar('.$usuario->idUsuario.', '.$usuario->estado.')">Activado</button>';
@@ -51,14 +54,12 @@
                         echo '<td>'.$usuario->correo.'</td>';
                         echo '<td>'.$usuario->nombre.'</td>';
                         echo '<td>'.$usuario->apellido.'</td>';
-                        echo '<td>'.$usuario->direccion.'</td>';
                         echo '<td>'.$estado.'</td>';
-                        echo '<td><a href="'.$url.'usuario/cargar/'.$usuario->idUsuario.'"><button type="button" title="Editar" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button></a> ';
-                        echo '<a href="'.$url.'usuario/ver/'.$usuario->idUsuario.'"><button title="Ver" type="button" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a> ';
+                        echo '<td><button type="button" title="Editar" onclick="Cargar('.$usuario->idUsuario.')" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> ';
                         echo '</td>';
                         echo '</tr>';
                         $i++;
-                       }
+                      }*/
                     ?>
                     </tbody>
                     <tfoot>
@@ -68,7 +69,6 @@
                         <th>Correo</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
-                        <th>Dirección</th>
                         <th>Estado</th>
                         <th>Opciones</th>
                       </tr>
@@ -80,3 +80,6 @@
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
+
+      <div id="msj" class="msjAlert"></div>
+      <?php $this->load->view("mantenimiento/form/usuario");?>
