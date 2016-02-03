@@ -41,10 +41,10 @@ class Login extends CI_Controller {
      /*
      FALTA ENVIAR POR CORREO
      */
-     $this->data['msj'] = [1, 'Su nueva contraseña se enviará a su correo.'];
+     $this->data['msj'] = array(1, 'Su nueva contraseña se enviará a su correo.');
      $this->load->view('recovery_view', $this->data);
    } else {
-     $this->data['msj'] = [2, 'El correo ingresado no existe.'];
+     $this->data['msj'] = array(2, 'El correo ingresado no existe.');
      $this->load->view('recovery_view', $this->data);
    }
 
