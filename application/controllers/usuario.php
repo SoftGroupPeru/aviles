@@ -82,7 +82,8 @@ class Usuario extends CI_Controller {
 
 			if($this->Usuario->Editar($data)) {
 				$data['rst'] = 1;
-				$data['msj'] = 'Usuario actualizado correctamente';
+			//	$data['msj'] = 'Usuario actualizado correctamente';
+				$data['msj'] = $this->db->last_query();
 			} else {
 				$data['rst'] = 0;
 				$data['msj'] = 'Ocurrio un error en la actualización';

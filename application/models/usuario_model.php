@@ -70,8 +70,8 @@ Class Usuario_model extends CI_Model {
               'nombre' => $data['nombre'],
               'apellido' => $data['apellido'],
               'correo' => $data['correo'],
-              'estado' => $data['estado']
-              //'fecha_registro' => date("Y-m-d")  FALTA PONER FECHA DE REGISTRO EN LA BD
+              'estado' => $data['estado'],
+              'created_at' => date("Y-m-d")
            );
    if($this->db->insert('usuario', $arr)) return true;
    else return false;
@@ -88,15 +88,18 @@ Class Usuario_model extends CI_Model {
  }
 
  public function Editar($data){
+
    $arr = array(
          'usuario' => $data['usuario'],
-         'clave' => $data['pass'],
          'nombre' => $data['nombre'],
          'apellido' => $data['apellido'],
          'correo' => $data['correo'],
-         'estado' => $data['estado']
-         //'fecha_registro' => date("Y-m-d")  FALTA PONER FECHA DE REGISTRO EN LA BD
+         'estado' => $data['estado'],
+         'updated_at' => date("Y-m-d")
         );
+   if ( $data["pass"] != "" ) {
+      $arr['clave'] = MD5($data['pass']);
+   }
    $this->db->where('idUsuario', $data['id']);
    if($this->db->update('usuario', $arr)) return true;
    else return false;

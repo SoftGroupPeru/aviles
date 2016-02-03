@@ -1,0 +1,383 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 03-02-2016 a las 17:34:32
+-- Versión del servidor: 10.1.9-MariaDB
+-- Versión de PHP: 5.5.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `aviles`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `capacitacion`
+--
+
+CREATE TABLE `capacitacion` (
+  `idCapacitacion` int(11) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `tipo` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marca`
+--
+
+CREATE TABLE `marca` (
+  `idMarca` int(11) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `estado` char(1) DEFAULT '1',
+  `imagen` varchar(255) DEFAULT NULL,
+  `descripcion` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `marca`
+--
+
+INSERT INTO `marca` (`idMarca`, `nombre`, `estado`, `imagen`, `descripcion`) VALUES
+(1, 'ELGA', '1', NULL, NULL),
+(2, 'COOLER MASTER', '1', NULL, NULL),
+(3, 'AGA', '1', NULL, NULL),
+(4, 'THERMO', '1', NULL, NULL),
+(5, 'PALL CORPORATION', '1', NULL, NULL),
+(6, 'PERKIN ELMER', '1', NULL, NULL),
+(7, 'JHON GUEST', '1', NULL, NULL),
+(8, 'HERAEUS', '1', NULL, NULL),
+(9, 'ENVIROMENTAL EXPRESS', '1', NULL, NULL),
+(10, 'VARIAN', '1', NULL, NULL),
+(11, 'EZKERN', '1', NULL, NULL),
+(12, 'GLASS EXPANSION', '1', NULL, NULL),
+(13, 'SUPER SHIELD', '1', NULL, NULL),
+(14, 'MEINHARD', '1', NULL, NULL),
+(15, 'NARVA', '1', NULL, NULL),
+(16, 'CETAC', '1', NULL, NULL),
+(17, 'HYDRONIX', '1', NULL, NULL),
+(18, 'AGILENT', '1', NULL, NULL),
+(19, 'IDEX', '1', NULL, NULL),
+(20, 'ATEN', '1', NULL, NULL),
+(21, 'S&J JUNNIPER & CO', '1', NULL, NULL),
+(22, 'TYGON', '1', NULL, NULL),
+(23, 'PHOTRON LAMP', '1', NULL, NULL),
+(24, 'PENTEK', '1', NULL, NULL),
+(25, 'COLDER PRODUCTS COMPANY', '1', NULL, NULL),
+(26, 'HAMILTON', '1', NULL, NULL),
+(27, 'ALFAGOMMA', '1', NULL, NULL),
+(28, 'MASON BOX', '1', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto`
+--
+
+CREATE TABLE `producto` (
+  `idProducto` int(11) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `codigo_barra` varchar(255) DEFAULT NULL,
+  `stock` char(1) DEFAULT '1',
+  `serie` varchar(255) DEFAULT NULL,
+  `parte` varchar(255) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `ubicacion` varchar(45) DEFAULT NULL,
+  `descripcion` text,
+  `imagen` varchar(255) DEFAULT NULL,
+  `estado` char(1) DEFAULT NULL,
+  `Marca_idMarca` int(11) DEFAULT NULL,
+  `producto_nuevo` int(1) DEFAULT NULL,
+  `producto_seminuevo` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`idProducto`, `nombre`, `codigo_barra`, `stock`, `serie`, `parte`, `cantidad`, `ubicacion`, `descripcion`, `imagen`, `estado`, `Marca_idMarca`, `producto_nuevo`, `producto_seminuevo`) VALUES
+(1, 'KIT DE EQUIPO PURIFICADOR', NULL, '1', NULL, 'LA700', 1, 'C', NULL, NULL, '1', 1, NULL, 1),
+(2, 'MEDPURE L1 D1 PACK', NULL, '1', NULL, 'LC174', 0, 'B', NULL, NULL, '1', 1, NULL, 1),
+(3, 'CARTRIDGE CONDITIONING', NULL, '1', NULL, 'LC178', 2, 'B', NULL, NULL, '1', 1, NULL, 1),
+(4, 'PROTEK L2 PRE TREAT', NULL, '1', NULL, 'LC177', 5, 'A', NULL, NULL, '1', 1, NULL, 1),
+(5, 'PACK STARTER MEDICA PRO', NULL, '1', NULL, 'LC189', 1, 'G', NULL, NULL, '1', 1, NULL, 1),
+(6, 'CONDITIONING CARTRIDGE', NULL, '1', NULL, 'LC122', 2, 'B', NULL, NULL, '1', 1, NULL, 1),
+(7, 'LABPURE - L1', NULL, '1', NULL, 'LC187', 9, 'A', NULL, NULL, '1', 1, NULL, 1),
+(8, 'TWIN PACK PURIFICTN CARTRIDGE', NULL, '1', NULL, 'LC163', 2, 'B', NULL, NULL, '1', 1, NULL, 1),
+(9, 'DL PACK - S8P - PUSH IN', NULL, '1', NULL, 'LC141', 7, 'B', NULL, NULL, '1', 1, NULL, 1),
+(10, 'CARTRIDGE PRETREATMENT', NULL, '1', NULL, 'LC140', 6, 'B', NULL, NULL, '1', 1, NULL, 1),
+(11, 'LABPURE S5 PURIFIC', NULL, '1', NULL, 'LC186', 3, 'B', NULL, NULL, '1', 1, NULL, 1),
+(12, 'LABPURE S1 PURIFIC', NULL, '1', NULL, 'LC182', 0, 'B', NULL, NULL, '1', 1, NULL, 1),
+(13, 'SANITIZ PACK - PURELAB FLEX', NULL, '1', NULL, 'LC209', 2, 'B', NULL, NULL, '1', 1, NULL, 1),
+(14, 'ESTANDAR CARTRIDGE', NULL, '1', NULL, 'LC208', 3, 'B', NULL, NULL, '1', 1, NULL, 1),
+(15, 'TARJETA MEDICA R', NULL, '1', NULL, 'PCB537269-02', 1, 'C', NULL, NULL, '1', 1, NULL, 1),
+(16, 'BOMBA DE RECIRCULACION', NULL, '1', NULL, 'PUMP35942-2', 1, 'C', NULL, NULL, '1', 1, NULL, 1),
+(17, 'INLEP FILTER', NULL, '1', NULL, 'LC126', 2, 'C', NULL, NULL, '1', 1, NULL, 1),
+(18, 'CARTUCHO DE ULTRAMICROFILTRACION', NULL, '1', NULL, 'LC109', 4, 'C', NULL, NULL, '1', 1, NULL, 1),
+(19, 'REGULADOR DE INGRESO DE PRESION DE AGUA', NULL, '1', NULL, 'LA652', 2, 'C', NULL, NULL, '1', 1, NULL, 1),
+(20, 'FUENTE COOLER MASTER 500W', NULL, '1', NULL, 'RS-500-ACAB-M3', 4, 'C', NULL, NULL, '1', 2, NULL, 1),
+(21, 'REGULADOR G.E BASELINE', NULL, '1', '', '3085325-86-326', 1, 'C', NULL, NULL, '1', NULL, NULL, 1),
+(22, 'BLOQUEADOR DE LLAMA', NULL, '1', NULL, '4103049', 2, 'F', NULL, NULL, '1', 3, NULL, 1),
+(23, 'REGULADOR AGA', NULL, '1', NULL, '3806 6509P2', 1, 'C', NULL, NULL, '1', 3, NULL, 1),
+(24, 'ELECTRODO', NULL, '1', '', '7107BN', 1, 'C', NULL, NULL, '1', 4, NULL, 1),
+(25, 'STANDARD CARTRIDGE FLEX 3', NULL, '1', NULL, 'LC214', 2, 'C', NULL, NULL, '1', 1, NULL, 1),
+(26, 'FILTRO DE PLASTICO', NULL, '1', NULL, 'PN4251', 17, 'C', NULL, NULL, '1', 5, NULL, 1),
+(27, 'SEORLB 0070 ORING', NULL, '1', NULL, 'B5119', 2, 'VARIOS 1', NULL, NULL, '1', 1, NULL, 1),
+(28, 'SEORLB 0060 ORING', NULL, '1', NULL, 'B5115', 2, 'VARIOS 1', NULL, NULL, '1', 1, NULL, 1),
+(29, 'PLUG', NULL, '1', NULL, '36860', 1, 'VARIOS 1', NULL, NULL, '1', 1, NULL, 1),
+(30, 'ADAPTADOR ACETAL 5/16" OD', NULL, '1', NULL, 'FTADAC0520', 2, 'VARIOS 1', NULL, NULL, '1', 1, NULL, 1),
+(31, 'ENCODER ASSEMBLY', NULL, '1', NULL, 'SP727', 2, 'VARIOS 1', NULL, NULL, '1', 1, NULL, 1),
+(32, 'POWER INLET MODULE', NULL, '1', NULL, 'CEPWLA0020', 1, 'VARIOS 1', NULL, NULL, '1', 1, NULL, 1),
+(33, 'ADAPTADOR ACETAL 6MM OD', NULL, '1', NULL, 'FTADAC5645', 6, 'VARIOS 1', NULL, NULL, '1', 1, NULL, 1),
+(34, 'ADAPTADOR ACETAL 8MM OD', NULL, '1', NULL, 'FTADAC5835', 2, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(35, 'DATA TAG ASSEMBLY', NULL, '1', NULL, 'SP772', 1, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(36, 'UST WASHER', NULL, '1', NULL, '0991-1246', 25, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(37, 'FLAT WASHER', NULL, '1', NULL, '0991-1688', 18, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(38, 'R8', NULL, '1', NULL, '0991-1375', 7, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(39, 'R7', NULL, '1', NULL, '0991-1375', 3, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(40, NULL, NULL, '1', NULL, 'B0190672', 29, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(41, 'CLIP CAP SCREW', NULL, '1', NULL, '0991-0473', 46, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(42, 'SPRING', NULL, '1', NULL, '0990-2426', 47, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(43, 'CONECTOR', NULL, '1', NULL, 'B0191060', 2, 'E2', NULL, NULL, '1', 6, NULL, 1),
+(44, 'O-RING', NULL, '1', NULL, 'B0174378', 58, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(45, 'SOLENOID-24VDC2 WAY', NULL, '1', NULL, 'VALV 36853', 3, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(46, 'BALL FLOAT-C/W 10MM', NULL, '1', NULL, 'VALV 38102-02', 0, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(47, 'NON RETURN VALVE', NULL, '1', NULL, '2', 0, 'VARIOS 2', NULL, NULL, '1', 1, NULL, 1),
+(48, 'ADAPTADOR DE EQUIPO PURIFICADOR', NULL, '1', NULL, 'FTADAC5815', 1, 'VARIOS 3', NULL, NULL, '1', 1, NULL, 1),
+(49, 'ADAPTADOR DE EQUIPO PURIFICADOR', NULL, '1', NULL, 'ADAP32800', 1, 'VARIOS 3', NULL, NULL, '1', 1, NULL, 1),
+(50, 'ADAPTADOR DE EQUIPO PURIFICADOR', NULL, '1', NULL, 'ADAP37218-03', 2, 'VARIOS 3', NULL, NULL, '1', 1, NULL, 1),
+(51, 'CODO DE UN EQUIPO PURIFICADOR', NULL, '1', NULL, 'FTELAC201354', 5, 'VARIOS 3', NULL, NULL, '1', 1, NULL, 1),
+(52, 'CONECTORDE UN EQUIPO PURIFICADOR', NULL, '1', NULL, 'FTLKAC5805', 3, 'VARIOS 3', NULL, NULL, '1', 1, NULL, 1),
+(53, 'CONECTOR T DE UN EQUIPO PURIFICADOR', NULL, '1', NULL, 'TEES38261', 1, 'VARIOS 3', NULL, NULL, '1', 1, NULL, 1),
+(54, 'VALVULA DE EQUIPO PURIFICADOR', NULL, '1', NULL, 'VALV38199', 1, 'VARIOS 3', NULL, NULL, '1', 1, NULL, 1),
+(55, 'ADAPTADOR DE EQUIPO PURIFICADOR', NULL, '1', NULL, 'VANRAC 201256', 2, 'VARIOS 3', NULL, NULL, '1', 1, NULL, 1),
+(56, 'CLIP CARTRIDGE RETAING MAX', NULL, '1', NULL, 'CLIP36526', 2, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(57, 'FOOT-RUBBER SELF', NULL, '1', NULL, 'FAWHGU202058', 4, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(58, 'BLANK - SBP-DISINFECTION', NULL, '1', NULL, 'BLAN36761', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(59, 'CONECTOR CARTRIDGE', NULL, '1', NULL, 'CONN35914', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(60, 'SPING 3.7 DIA x 9.5 LG', NULL, '1', NULL, 'FXSSYN202183', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(61, 'RIVET 5MM x 12MM', NULL, '1', NULL, 'FXRIY00110', 2, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(62, 'SOCKET NYLON 1/2" BSPF', NULL, '1', NULL, 'FPSONY4010', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(63, 'ADAPTADOR 1/4" BSP NOZZLE', NULL, '1', NULL, 'ADAP37236', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(64, 'RING 0" 6MM ID x 3MM', NULL, '1', NULL, 'SEORGU202772', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(65, 'TUBE 7.5MM OD x 2.5MM ID', NULL, '1', NULL, 'FTTUSN201312', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(66, 'PIN DOWEL 4MM DIA x 14MML', NULL, '1', NULL, 'FXPNYN202264', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(67, 'VALVE N/R 3/8" BSPF IPSI', NULL, '1', NULL, 'VANRPP201279', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(68, 'CAP-CARTRIDGE BYPASS', NULL, '1', NULL, 'CAPS35917', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(69, 'STRAINER-IN-LINE WASHERTYPE', NULL, '1', NULL, 'FTFI550805', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(70, 'SNAP RIVET 3.5MM DIA x 6MM', NULL, '1', NULL, 'FXRIYM202181', 4, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(71, 'SEAL 19MM OD x 11MM ID', NULL, '1', NULL, 'SESELB0010', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(72, 'STRAP CABLE RELEASABLE', NULL, '1', NULL, 'FXTIGU202188', 2, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(73, 'RING O" B5117EPDM RUBBER', NULL, '1', NULL, 'SEORGU201860', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(74, 'MOUSING BLOCK SANITISATION', NULL, '1', NULL, 'LA567', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(75, 'TIE CABLE 100MM BLACK', NULL, '1', NULL, 'FXT12L0110', 6, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(76, 'THERMISTOR ASSEMBLY', NULL, '1', NULL, 'SP713-03', 1, 'VARIOS 4', NULL, NULL, '1', 1, NULL, 1),
+(77, 'CONECTOR 8MM x 1/4', NULL, '1', NULL, 'PM010802E', 94, 'D3', NULL, NULL, '1', 7, NULL, 1),
+(78, 'CONECTOR 10MM UNION TEE', NULL, '1', NULL, 'PM0210E', 19, 'D3', NULL, NULL, '1', 7, NULL, 1),
+(79, 'VALVULA 10MM', NULL, '1', NULL, 'PPMSV041010W', 9, 'D3', NULL, NULL, '1', 7, NULL, 1),
+(80, 'CONECTOR 15MM', NULL, '1', NULL, 'PM0215E', 20, 'D3', NULL, NULL, '1', 7, NULL, 1),
+(81, 'CONECTOR 6MM x 1/8 SNIVEL', NULL, '1', NULL, 'PM090601E', 90, 'D3', NULL, NULL, '1', 7, NULL, 1),
+(82, 'CONECTOR 8MM x 1/4 MALE CONECT', NULL, '1', NULL, 'PM010812E', 100, 'D3', NULL, NULL, '1', 7, NULL, 1),
+(83, 'CONECTOR 8MM - 6MM', NULL, '1', NULL, 'PM060806E', 96, 'D3', NULL, NULL, '1', 7, NULL, 1),
+(84, 'CONECTOR 3/8 - 5/6 PLUG', NULL, '1', NULL, 'PI221210S', 98, 'D3', NULL, NULL, '1', 7, NULL, 1),
+(85, 'CONECTOR 5/16 UNION TEE', NULL, '1', NULL, 'PM02085', 18, 'D3', NULL, NULL, '1', 7, NULL, 1),
+(86, 'DEUTERIUM LAMP LAMP SD3651-06', NULL, '1', 'F14775', '80055323', NULL, 'D3', NULL, NULL, '1', 8, NULL, 1),
+(87, 'DEUTERIUM LAMP LAMP SD3651-06', NULL, '1', 'F14737', '80055323', NULL, 'D3', NULL, NULL, '1', 8, NULL, 1),
+(88, 'Lampara', NULL, '1', NULL, 'LC105', 3, 'D2', NULL, NULL, '1', 1, NULL, 1),
+(89, 'Lampara', NULL, '1', NULL, 'LC115', 0, 'D4', NULL, NULL, '1', NULL, NULL, 1),
+(90, 'UV LAMP PURELAB FLEX', NULL, '1', NULL, 'LC210', 2, 'D2', NULL, NULL, '1', 1, NULL, 1),
+(91, 'VALVE TAP BABY BLUE', NULL, '1', NULL, 'VABLPP0010 X 5', 5, 'D2', NULL, NULL, '1', 1, NULL, 1),
+(92, 'DEUTERIUM LAMP HERAUS', NULL, '1', 'C51274', '80081633', NULL, 'D4', NULL, NULL, '1', 8, NULL, 1),
+(93, 'DEUTERIUM LAMP HERAUS', NULL, '1', 'C71835', '80081633', 0, 'D4', NULL, NULL, '1', 8, NULL, 1),
+(94, 'DEUTERIUM LAMP HERAUS', NULL, '1', 'C46440', '80081633', NULL, 'D4', NULL, NULL, '1', 8, NULL, 1),
+(95, 'DEUTERIUM LAMP HERAUS', NULL, '1', 'C51016', '80081633', NULL, 'D4', NULL, NULL, '1', 8, NULL, 1),
+(96, 'DEUTERIUM LAMP HERAUS', NULL, '1', 'C51264', '80081633', NULL, 'D4', NULL, NULL, '1', 8, NULL, 1),
+(97, 'HANDLE-DISPENSE TAP', NULL, '1', NULL, 'HAND36785 X 1', 1, 'D2', NULL, NULL, '1', 1, NULL, 1),
+(98, 'ALOK MALE CONECTOR', NULL, '1', NULL, '4MNSC4N-B', NULL, 'D4', NULL, NULL, '1', 9, NULL, 1),
+(99, 'TUBOS POLIPROPILENO PK100', NULL, '1', NULL, 'SC0301', 200, 'D4', NULL, NULL, '1', 9, NULL, 1),
+(100, NULL, NULL, '1', NULL, 'SUPP36850', 2, 'D2', NULL, NULL, '1', 1, NULL, 1),
+(101, 'ALOK MALE CONECTOR', NULL, '1', NULL, '5MSC4N-B', 94, 'D4', NULL, NULL, '1', NULL, NULL, 1),
+(102, 'MARK2-COMPOSITE', NULL, '1', NULL, 'LC136M2', 6, 'D3', NULL, NULL, '1', 1, NULL, 1),
+(103, 'FILTER CAPSULE POU 0.2M', NULL, '1', NULL, 'LC145', 3, 'D2', NULL, NULL, '1', 1, NULL, 1),
+(104, 'TABLETAS DE SANITIZATION', NULL, '1', NULL, 'CT3', 3, 'D2', NULL, NULL, '1', 1, NULL, 1),
+(105, 'DESINFECTION TABLETS', NULL, '1', NULL, 'CT1', 20, 'D2', NULL, NULL, '1', 1, NULL, 1),
+(106, 'SANITIZATION TABLETS', NULL, '1', NULL, 'CT3-50', 92, 'D2', NULL, NULL, '1', 1, NULL, 1),
+(107, 'PANEL MOUNT WITH NUT EMI FILTER', NULL, '1', NULL, 'EMI-A14', 0, 'D4', NULL, NULL, '1', NULL, NULL, 1),
+(108, 'CONECTOR INTERNO DE VALVULA', NULL, '1', NULL, 'A001309', 10, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(109, 'BURNER GASKET KIT', NULL, '1', NULL, '0047-0988', 0, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(110, 'TUBING ASSEMBLY 50 CM COIL', NULL, '1', NULL, 'A001488', 7, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(111, 'VITON END CAP O-RING', NULL, '1', NULL, '09902147', 0, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(112, NULL, NULL, '1', NULL, 'A001310', 8, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(113, 'ROLLEHEAD PUMP WHEEL COMPLETE', NULL, '1', NULL, 'A001051', 2, 'E1', NULL, NULL, '1', 11, NULL, 1),
+(114, 'PLATEN FOR FS3000 PUMP', NULL, '1', NULL, 'A001055', 6, 'E1', NULL, NULL, '1', 11, NULL, 1),
+(115, 'CONECTOR INTERNO DE VALVULA 12CM', NULL, '1', NULL, 'A001483', 10, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(116, 'SWITCH ONN', NULL, '1', NULL, '4810030600', 28, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(117, 'SWITCH OFF', NULL, '1', NULL, '4810029900', 32, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(118, 'TUBING ASSEMBLY', NULL, '1', NULL, 'B019809711', 9, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(119, 'O-RING SCREW BEAD ADJUSTER (NITRILO 2006)', NULL, '1', NULL, '6910000100', 17, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(120, 'O-RING BURNER (NITRILO 2119)', NULL, '1', NULL, '6910010500', 105, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(121, 'O-RING SPRAYCHAMBER (NITRILO 2127)', NULL, '1', NULL, '6910037000', 82, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(122, 'ORING KIT ACUOSO', NULL, '1', NULL, '9910093400', 0, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(123, NULL, NULL, '1', NULL, '6910009700', 29, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(124, 'BOVINA- PARTE DE EQUIPO ICP', NULL, '1', NULL, '10-900-1001G', 4, 'E1', NULL, NULL, '1', 12, NULL, 1),
+(125, 'SWITCH PUERTA', NULL, '1', NULL, '4810034200', 88, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(126, 'KIT FUSIBLES', NULL, '1', NULL, '1910009500', 8, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(127, 'POTENCIOMETRO DE PRECISION', NULL, '1', NULL, '534', 2, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(128, 'NEBULIZER CAPILLARY', NULL, '1', NULL, '9910093000', 0, 'E1', NULL, NULL, '1', NULL, NULL, 1),
+(129, 'TRANSISTORES', NULL, '1', NULL, 'IRFBE30', 2, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(130, 'SW MICROPLUNGERSILVER', NULL, '1', NULL, '4810023300', 2, 'E1', NULL, NULL, '1', NULL, NULL, 1),
+(131, 'FREESCALE SEMICONDUCTOR', NULL, '1', NULL, 'MPX5700GP', 1, 'E1', NULL, NULL, '1', 13, NULL, 1),
+(132, 'SENSOR DE CARCAZA', NULL, '1', NULL, 'SP714HOUS', 1, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(133, 'TORCH SPACER', NULL, '1', NULL, 'W101-2410', 2, 'E1', NULL, NULL, '1', 10, NULL, 1),
+(134, 'CABLE AMPEROMETRIC DETEC', NULL, '1', NULL, 'A002299', 3, 'E1', NULL, NULL, '1', 11, NULL, 1),
+(135, 'LENG LIFE SHIELD PLATE', NULL, '1', NULL, 'AT5004', 2, 'E1', NULL, NULL, '1', 12, NULL, 1),
+(136, 'PROBE ASSEMBLY', NULL, '1', NULL, 'A002535', 1, 'E1', NULL, NULL, '1', NULL, NULL, 1),
+(137, 'QUART TORCH BONNET FOR AGI', NULL, '1', NULL, '31-808-2577', 2, 'E1', NULL, NULL, '1', 12, NULL, 1),
+(138, 'ABRAZADERAS', NULL, '1', NULL, '9903004', 0, 'E1', NULL, NULL, '1', NULL, NULL, 1),
+(139, 'RUBBER MOTOR MOUNT BUILT', NULL, '1', NULL, '22-0223', 16, 'E2', NULL, NULL, '1', 14, NULL, 1),
+(140, 'Lampara DE MERCURIO', NULL, '1', '140812', 'B0510487', NULL, 'E2', NULL, NULL, '1', 15, NULL, 1),
+(141, 'Lampara DE MERCURIO', NULL, '1', '140813', 'B0510487', NULL, 'E2', NULL, NULL, '1', 15, NULL, 1),
+(142, 'Lampara DE MERCURIO', NULL, '1', '140814', 'B0510487', NULL, 'E2', NULL, NULL, '1', 15, NULL, 1),
+(143, 'MP2 PVC 2-STOP FLARED TUBING 0.015" (0.38MM)', NULL, '1', NULL, 'MPP-038-F-PVC', 1, 'E2', NULL, NULL, '1', 14, NULL, 1),
+(144, 'MP2 PVC 2-STOP FLARED TUBING 0.030" (0.76MM)', NULL, '1', NULL, 'MPP-076-F-PVC', 1, 'E2', NULL, NULL, '1', 14, NULL, 1),
+(145, 'MP2 SANTOPRENE 2-STOP TUBING 0.051" (1.30MM)', NULL, '1', NULL, 'MPP-130-PHR', 1, 'E2', NULL, NULL, '1', 14, NULL, 1),
+(146, 'DSA-7VALVE6-SPORT', NULL, '1', NULL, 'SP6541', 0, 'E2', NULL, NULL, '1', NULL, NULL, 1),
+(147, 'RESORTE (ENGANCHE DE CABEZA)', NULL, '1', NULL, '09902361', 8, 'E2', NULL, NULL, '1', 6, NULL, 1),
+(148, 'V/P MODULE', NULL, '1', '911411', 'SP6687', 1, 'E2', NULL, NULL, '1', 16, NULL, 1),
+(149, 'SPRING EXTENSION', NULL, '1', NULL, '09922001', 19, 'E2', NULL, NULL, '1', 6, NULL, 1),
+(150, 'SOPORTE METAL BLANCO PARA PORTAFILTROS', NULL, '1', NULL, 'HG2520', 14, 'E2', NULL, NULL, '1', 17, NULL, 1),
+(151, 'O-RING', NULL, '1', NULL, '09902043', NULL, 'E2', NULL, NULL, '1', 6, NULL, 1),
+(152, 'MEMBRANA PARA VALVULA NO RETRNO (5M)', NULL, '1', NULL, 'B0135123', 1, 'F', NULL, NULL, '1', NULL, NULL, 1),
+(153, 'MULDING BURNER ROT SCREW', NULL, '1', NULL, 'N0371170', 9, 'E2', NULL, NULL, '1', 6, NULL, 1),
+(154, 'CLEANER N20 DURNER HEAD', NULL, '1', NULL, '03031573', 1, 'E2', NULL, NULL, '1', 6, NULL, 1),
+(155, 'SPRING EXTENSION', NULL, '1', NULL, '09902361', 1, 'F', NULL, NULL, '1', 6, NULL, 1),
+(156, 'TEFLON WASHER', NULL, '1', NULL, '03031802', 3, 'E2', NULL, NULL, '1', 6, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `servicios`
+--
+
+CREATE TABLE `servicios` (
+  `idServicios` int(11) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `tipo` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `idUsuario` int(11) NOT NULL,
+  `usuario` varchar(45) DEFAULT NULL,
+  `clave` varchar(255) DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `apellido` varchar(255) DEFAULT NULL,
+  `correo` varchar(45) DEFAULT NULL,
+  `estado` int(1) NOT NULL DEFAULT '1',
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `usuario`, `clave`, `nombre`, `apellido`, `correo`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 'guido', 'a3c4b614a1f072e0f968c2712a36323f', 'Guido Bernabe', 'Uribe Vilca', 'guido,uribe@aviles-analitica.com', 1, '0000-00-00', '0000-00-00'),
+(2, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Jesus', 'Soto Gomez', 'tonysotogomez@gmail.com', 1, '0000-00-00', '2016-02-03');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `capacitacion`
+--
+ALTER TABLE `capacitacion`
+  ADD PRIMARY KEY (`idCapacitacion`);
+
+--
+-- Indices de la tabla `marca`
+--
+ALTER TABLE `marca`
+  ADD PRIMARY KEY (`idMarca`);
+
+--
+-- Indices de la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`idProducto`),
+  ADD KEY `fk_Producto_Marca1_idx` (`Marca_idMarca`);
+
+--
+-- Indices de la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  ADD PRIMARY KEY (`idServicios`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`idUsuario`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `capacitacion`
+--
+ALTER TABLE `capacitacion`
+  MODIFY `idCapacitacion` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `marca`
+--
+ALTER TABLE `marca`
+  MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+--
+-- AUTO_INCREMENT de la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  MODIFY `idServicios` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD CONSTRAINT `fk_Producto_Marca1` FOREIGN KEY (`Marca_idMarca`) REFERENCES `marca` (`idMarca`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -53,11 +53,30 @@ $(document).ready(function() {
   function Nuevo(){
     $("#txt_usuario").val('');
     $("#txt_pass").val('');
+    $("#txt_nombre").val('');
+    $("#txt_apellido").val('');
+    $("#txt_correo").val('');
     $('#usuarioModal').find('.modal-title').text('Nuevo Usuario');
     $('#usuarioModal').modal('show');
   }
 
+  //validacion basicas
+  function validar(){
+    if($("#txt_usuario").val() == "" || $("#txt_pass").val() == "" || $("#txt_nombre").val() == "" || $("#txt_apellido").val() == "" || $("#txt_correo").val() == ""){
+      return false;
+    } else {
+      var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (!expr.test($("#txt_correo").val())){
+          return false;
+      } else {
+        return true;
+      }
+
+    }
+  }
+
   function AgregarEditar(AE){
+    if (validar()) {
         var datos=$("#form_usuarios").serialize().split("txt_").join("").split("slct_").join("");
 
         var accion="usuario/crear";
@@ -83,11 +102,14 @@ $(document).ready(function() {
                   }
                   else{
                       $.each(obj.msj,function(index,datos){
-                          mensaje('error', data.msj, 5000);
+                          mensaje('error', data.msj);
                       });
                   }
             }
         });
+      } else {
+          mensaje('error', "Ingrese todos los campos correctamente", 5000);
+      }
   }
 
   function Cargar(id){
