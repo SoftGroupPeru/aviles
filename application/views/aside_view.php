@@ -28,6 +28,9 @@
         <li class="active"><a href="<?php echo $url;?>usuario">
             <i class="fa fa-users"></i><span>Usuarios</span></a>
         </li>
+        <li class="active"><a href="<?php echo $url;?>marca">
+            <i class="fa fa-bookmark"></i><span>Marcas</span></a>
+        </li>
         <li class="header">Navegacion</li>
         <li class="active">
           <a href="#">
