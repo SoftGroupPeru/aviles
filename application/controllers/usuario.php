@@ -111,8 +111,9 @@ class Usuario extends CI_Controller {
 
 	public function verifica_user()	{
 		if($this->input->is_ajax_request()){
-			$username = $this->input->post('username');
-			$resultado = $this->Usuario->verifica_user($username);
+			$data['username'] = $this->input->post('username');
+			$data['id'] = $this->input->post('id'); //para editar debe permitir mostrar su valor actual
+			$resultado = $this->Usuario->verifica_user($data);
 			if($resultado) {
 				$data['rst'] = 1; //existe
 			} else {
@@ -124,8 +125,9 @@ class Usuario extends CI_Controller {
 
 	public function verifica_correo()	{
 		if($this->input->is_ajax_request()){
-			$correo = $this->input->post('correo');
-			$resultado = $this->Usuario->verifica_correo($correo);
+			$data['correo'] = $this->input->post('correo');
+			$data['id'] = $this->input->post('id'); //para editar debe permitir mostrar su valor actual
+			$resultado = $this->Usuario->verifica_correo($data);
 			if($resultado) {
 				$data['rst'] = 1;
 			} else {

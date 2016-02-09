@@ -5,20 +5,30 @@ $(document).ready(function() {
 
   $('#txt_usuario').blur(function(){
     var user = $("#txt_usuario").val().trim();
+    var datos = {username:user};
+
+    var editar = $("#submit").val(); // 0 agregar, 1 editar
+    if(editar == 1) {
+      var idUsuario = $("#txt_id").val();
+      datos = {username:user, id:idUsuario};
+    }
+
     $.ajax({
         url         : url + "usuario/verifica_user",
         type        : 'POST',
         cache       : false,
         dataType    : 'json',
-        data        : {username:user},
+        data        : datos,
         success : function(data) {
-              if(data.rst==0){
+              if(data.rst==0){ //valido
+                $('#submit').removeAttr('disabled');
                 $('#form-group').removeClass('has-error');
                 $('#form-group').removeClass('has-warning');
                 $('#form-group').addClass('has-success');
                 $('#form-group .control-label').html('<i class="fa fa-check"></i> Usuario disponible!');
               }
-              else{
+              else{ //si existe
+                $('#submit').attr('disabled','disabled');
                 $('#form-group').removeClass('has-error');
                 $('#form-group').removeClass('has-success');
                 $('#form-group').addClass('has-warning');
@@ -30,20 +40,29 @@ $(document).ready(function() {
 
   $('#txt_correo').blur(function(){
     var correo = $("#txt_correo").val().trim();
+    var datos = {correo:correo};
+    var editar = $("#submit").val(); // 0 agregar, 1 editar
+    if(editar == 1) {
+      var idUsuario = $("#txt_id").val();
+      datos = {correo:correo, id:idUsuario};
+    }
+
     $.ajax({
         url         : url + "usuario/verifica_correo",
         type        : 'POST',
         cache       : false,
         dataType    : 'json',
-        data        : {correo:correo},
+        data        : datos,
         success : function(data) {
               if(data.rst==0){ //no existe
+                $('#submit').removeAttr('disabled');
                 $('#form-group2').removeClass('has-error');
                 $('#form-group2').removeClass('has-warning');
               //  $('#form-group2').addClass('has-success');
                 $('#form-group2 .control-label').html('Correo');
               }
               else{
+                $('#submit').attr('disabled','disabled');
                 $('#form-group2').removeClass('has-error');
                 $('#form-group2').removeClass('has-success');
                 $('#form-group2').addClass('has-warning');
@@ -106,6 +125,10 @@ $(document).ready(function() {
   }
 
   function Nuevo(){
+    //reinicio los valores por defecto
+    $("#submit").text('Nuevo');
+    $("#submit").val('0');
+    $('#submit').removeAttr('disabled');
     $('#form-group').removeClass('has-success');
     $('#form-group .control-label').html('Usuario');
     $("#txt_pass").attr("placeholder", "Ingrese Contraseña");
@@ -204,6 +227,7 @@ $(document).ready(function() {
   function Cargar(id){
     $('#usuarioModal').modal('show');
     $('#usuarioModal').find('.modal-title').text('Editar Usuario');
+    $("#submit").text('Editar');
         $.ajax({
             url         : url + "usuario/cargar",
             type        : 'POST',
@@ -222,7 +246,6 @@ $(document).ready(function() {
                 $("#slct_estado").val(data.estado);
 
                 $("#submit").val('1');
-                onclick="Agregar(0)"
             }
         });
   }

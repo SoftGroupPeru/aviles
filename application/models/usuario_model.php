@@ -33,10 +33,11 @@ Class Usuario_model extends CI_Model {
    }
  }
 
- function verifica_user($username) {
+ function verifica_user($data) {
    $this -> db -> select('usuario');
    $this -> db -> from('Usuario');
-   $this -> db -> where('usuario', $username);
+   $this -> db -> where('usuario', $data['username']);
+   if(!empty($data['id'])) $this -> db -> where('idUsuario != '.$data['id']);
    $this -> db -> limit(1);
 
    $query = $this -> db -> get();
@@ -48,10 +49,11 @@ Class Usuario_model extends CI_Model {
    }
  }
 
- function verifica_correo($correo) {
+ function verifica_correo($data) {
    $this -> db -> select('usuario');
    $this -> db -> from('Usuario');
-   $this -> db -> where('correo', $correo);
+   $this -> db -> where('correo', $data['correo']);
+   if(!empty($data['id'])) $this -> db -> where('idUsuario != '.$data['id']);
    $this -> db -> limit(1);
 
    $query = $this -> db -> get();
