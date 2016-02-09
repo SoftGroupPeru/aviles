@@ -109,6 +109,53 @@ class Usuario extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function verifica_user()	{
+		if($this->input->is_ajax_request()){
+			$username = $this->input->post('username');
+			$resultado = $this->Usuario->verifica_user($username);
+			if($resultado) {
+				$data['rst'] = 1; //existe
+			} else {
+				$data['rst'] = 0;
+			}
+			echo json_encode($data);
+		}
+	}
+
+	public function verifica_correo()	{
+		if($this->input->is_ajax_request()){
+			$correo = $this->input->post('correo');
+			$resultado = $this->Usuario->verifica_correo($correo);
+			if($resultado) {
+				$data['rst'] = 1;
+			} else {
+				$data['rst'] = 0;
+			}
+			echo json_encode($data);
+		}
+	}
+
+	public function verificacion()	{
+		if($this->input->is_ajax_request()){
+			$username = $this->input->post('username');
+			$correo = $this->input->post('correo');
+
+			$user_exist = $this->Usuario->verifica_user($username);
+			$correo_exist = $this->Usuario->verifica_correo($correo);
+
+			if($user_exist && $correo_exist) {
+				$data['rst'] = 3;
+			} elseif($user_exist) {
+				$data['rst'] = 2;
+			} elseif($correo_exist) {
+				$data['rst'] = 1;
+			} else {
+				$data['rst'] = 0;
+			}
+			echo json_encode($data);
+		}
+	}
+
 }
 
 

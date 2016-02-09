@@ -10,11 +10,8 @@
             </div>
             <div class="modal-body">
                 <form id="form_usuarios" name="form_usuarios" action="" method="post">
-                    <div class="form-group">
+                    <div id="form-group" class="form-group">
                         <label class="control-label">Usuario
-                            <a id="error_nombre" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese Nombre">
-                                <i class="fa fa-exclamation"></i>
-                            </a>
                         </label>
                         <input type="text" class="form-control" placeholder="Ingrese Usuario" name="txt_usuario" id="txt_usuario">
                     </div>
@@ -30,7 +27,7 @@
                       <label class="control-label">Apellidos</label>
                         <input type="text" class="form-control" placeholder="Ingrese Apellidos" name="txt_apellido" id="txt_apellido">
                     </div>
-                    <div class="form-group">
+                    <div id="form-group2" class="form-group">
                       <label class="control-label">Correo</label>
                         <input type="text" class="form-control" placeholder="Ingrese Correo" name="txt_correo" id="txt_correo">
                     </div>
