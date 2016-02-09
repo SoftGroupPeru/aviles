@@ -49,3 +49,118 @@ $(document).ready(function() {
         $("#t_marcas").dataTable();
         //activarTabla();
       }
+
+
+      function Nuevo(){
+        $("#txt_marca").val('');
+        $("#txt_descripcion").val('');
+        $('#marcaModal').find('.modal-title').text('Nueva Marca');
+        $('#marcaModal').modal('show');
+      }
+
+
+      function validar(){
+        if($("#txt_marca").val() == "" || $("#txt_descripcion").val() == ""){
+          return false;
+        } else {
+          return true;
+          }
+
+        }
+
+
+      function AgregarEditar(AE){
+        if (validar()) {
+            var datos=$("#form_marcas").serialize().split("txt_").join("").split("slct_").join("");
+
+            var accion="marca/crear";
+            if(AE==1){
+                accion="marca/editar";
+            }
+            $.ajax({
+                url         : url + accion,
+                type        : 'POST',
+                cache       : false,
+                dataType    : 'json',
+                data        : datos,
+                beforeSend : function() {
+                    $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
+                },
+                success : function(data) {
+                    $(".overlay,.loading-img").remove();
+                    if(data.rst==1){
+                          $('#t_marcas').dataTable().fnDestroy();
+                          ListaMarcas();
+                          $('#marcaModal .modal-footer [data-dismiss="modal"]').click();
+                          mensaje('success', data.msj, 5000);
+                      }
+                      else{
+                          $.each(obj.msj,function(index,datos){
+                              mensaje('error', data.msj);
+                          });
+                      }
+                }
+            });
+          } else {
+              mensaje('error', "Ingrese todos los campos correctamente", 5000);
+          }
+      }
+
+      function Cargar(id){
+        $('#marcaModal').modal('show');
+        $('#marcaModal').find('.modal-title').text('Editar Marca');
+            $.ajax({
+                url         : url + "marca/cargar",
+                type        : 'POST',
+                cache       : false,
+                dataType    : 'json',
+                data        : {id: id},
+                success : function(data) {
+
+                    $("#txt_id").val(data.idMarca);
+                    $("#txt_marca").val(data.nombre);
+                    $("#txt_descripcion").val(data.descripcion);
+                    $("#slct_estado").val(data.estado);
+
+                    $("#submit").val('1');
+                    onclick="Agregar(0)"
+                }
+            });
+      }
+
+      function CambiarEstadoMarcas(id,estado){
+            //$("#form_marcas").append("<input type='hidden' value='"+id+"' name='id'>");
+          //  $("#form_marcas").append("<input type='hidden' value='"+AD+"' name='estado'>");
+            var datos=$("#form_marcas").serialize().split("txt_").join("").split("slct_").join("");
+            $.ajax({
+                url         : 'marca/cambiarestado',
+                type        : 'POST',
+                cache       : false,
+                dataType    : 'json',
+                data        : {id:id,estado: estado},
+                beforeSend : function() {
+                    $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
+                },
+                success : function(obj) {
+                    $(".overlay,.loading-img").remove();
+                    if(obj.rst==1){
+                        $('#t_marcas').dataTable().fnDestroy();
+                        ListarMarcas();
+                        //mensaje('success', obj.msj, 6000);
+                    }
+                    else{
+                        $.each(obj.msj,function(index,datos){
+                            $("#error_"+index).attr("data-original-title",datos);
+                            $('#error_'+index).css('display','');
+                        });
+                    }
+                },
+                error: function(){
+                    $(".overlay,.loading-img").remove();
+                    Psi.mensaje('danger', 'Ocurrio una interrupción en el proceso,Favor de intentar nuevamente.', 6000);
+
+                }
+            });
+
+
+          }

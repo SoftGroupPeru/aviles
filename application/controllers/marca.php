@@ -40,6 +40,73 @@ class Marca extends CI_Controller {
 		}
 	}
 
+	public function crear()
+	{
+		if($this->input->is_ajax_request()){
+			$data['nombre'] = $this->input->post('nombre');
+			$data['imagen'] = $this->input->post('imagen');
+			$data['descripcion'] = $this->input->post('descripcion');
+			$data['estado'] = $this->input->post('estado');
+
+			if($this->Marca->Insertar($data)) {
+				$data['rst'] = 1;
+				$data['msj'] = 'Marca registrada correctamente';
+			} else {
+				$data['rst'] = 0;
+				$data['msj'] = 'Ocurrio un error en el registro de la marca';
+			}
+			echo json_encode($data);
+		}
+	}
+
+
+	public function cargar()
+	{
+		if($this->input->is_ajax_request()){
+			$id = $this->input->post('id');
+
+			$data = $this->Marca->Cargar($id);
+			echo json_encode($data);
+		}
+	}
+
+	public function editar()
+	{
+		if($this->input->is_ajax_request()){
+			$data['id'] = $this->input->post('id');
+			$data['marca'] = $this->input->post('marca');
+			$data['descripcion'] = $this->input->post('descripcion');
+			$data['estado'] = $this->input->post('estado');
+
+			if($this->Marca->Editar($data)) {
+				$data['rst'] = 1;
+			//	$data['msj'] = 'Usuario actualizado correctamente';
+				$data['msj'] = $this->db->last_query();
+			} else {
+				$data['rst'] = 0;
+				$data['msj'] = 'Ocurrio un error en la actualización';
+			}
+			echo json_encode($data);
+		}
+	}
+
+	public function cambiarestado()
+	{
+		$estado = $this->input->post('estado');
+
+		$data['estado'] = ($estado == 1)?'0':'1';
+		$data['id'] = $this->input->post('id');
+
+		if($this->Marca->activardesactivar($data)) {
+			$data['rst'] = 1;
+			$data['msj'] = 'Marca actualizado correctamente';
+		} else {
+			$data['rst'] = 0;
+			$data['msj'] = 'Marca un error en la actualización';
+		}
+		echo json_encode($data);
+	}
+
 
 }
 
