@@ -1,5 +1,60 @@
 $(document).ready(function() {
+  var rpta = false;
+
   ListarUsuarios();
+
+  $('#txt_usuario').blur(function(){
+    var user = $("#txt_usuario").val().trim();
+    $.ajax({
+        url         : url + "usuario/verifica_user",
+        type        : 'POST',
+        cache       : false,
+        dataType    : 'json',
+        data        : {username:user},
+        success : function(data) {
+              if(data.rst==0){
+                $('#form-group').removeClass('has-error');
+                $('#form-group').removeClass('has-warning');
+                $('#form-group').addClass('has-success');
+                $('#form-group .control-label').html('<i class="fa fa-check"></i> Usuario disponible!');
+              }
+              else{
+                $('#form-group').removeClass('has-error');
+                $('#form-group').removeClass('has-success');
+                $('#form-group').addClass('has-warning');
+                $('#form-group .control-label').html('<i class="fa fa-bell-o"></i> Usuario ya existe!');
+              }
+        }
+    });
+  });
+
+  $('#txt_correo').blur(function(){
+    var correo = $("#txt_correo").val().trim();
+    $.ajax({
+        url         : url + "usuario/verifica_correo",
+        type        : 'POST',
+        cache       : false,
+        dataType    : 'json',
+        data        : {correo:correo},
+        success : function(data) {
+              if(data.rst==0){ //no existe
+                $('#form-group2').removeClass('has-error');
+                $('#form-group2').removeClass('has-warning');
+              //  $('#form-group2').addClass('has-success');
+                $('#form-group2 .control-label').html('Correo');
+              }
+              else{
+                $('#form-group2').removeClass('has-error');
+                $('#form-group2').removeClass('has-success');
+                $('#form-group2').addClass('has-warning');
+                $('#form-group2 .control-label').html('<i class="fa fa-bell-o"></i> Correo ya existe!');
+              }
+        }
+    });
+  });
+
+
+
 });
 
   function ListarUsuarios(){
@@ -51,6 +106,9 @@ $(document).ready(function() {
   }
 
   function Nuevo(){
+    $('#form-group').removeClass('has-success');
+    $('#form-group .control-label').html('Usuario');
+    $("#txt_pass").attr("placeholder", "Ingrese Contraseña");
     $("#txt_usuario").val('');
     $("#txt_pass").val('');
     $("#txt_nombre").val('');
@@ -62,17 +120,48 @@ $(document).ready(function() {
 
   //validacion basicas
   function validar(){
+    //faltan campos requeridos
     if($("#txt_usuario").val() == "" || $("#txt_pass").val() == "" || $("#txt_nombre").val() == "" || $("#txt_apellido").val() == "" || $("#txt_correo").val() == ""){
       return false;
-    } else {
-      var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-      if (!expr.test($("#txt_correo").val())){
-          return false;
-      } else {
-        return true;
-      }
-
     }
+    //correo es incorrecto
+    var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (!expr.test($("#txt_correo").val())){
+      $('#form-group2').addClass('has-error');
+      $('#form-group2 .control-label').html('<i class="fa fa-times-circle-o"></i> Correo Inválido!');
+      return false;
+    }
+    return true;
+    //verificacion usuario y correo existentes
+  /*  var user =$("#txt_usuario").val().trim();
+    var correo =$("#txt_correo").val().trim();
+    var rpta = 0;
+    $.ajax({
+        url         : url + 'usuario/verificacion',
+        type        : 'POST',
+        cache       : false,
+        dataType    : 'json',
+        data        : {username: user, correo: correo},
+        success : function(data) {
+            switch(data.rst) {
+                case 1: //correo existente
+                    $('#form-group2').addClass('has-error');
+                    $('#form-group2 .control-label').html('<i class="fa fa-times-circle-o"></i> Correo ya existe!');
+                    break;
+                case 2: //usuario existente
+                    $('#form-group').addClass('has-error');
+                    $('#form-group .control-label').html('<i class="fa fa-times-circle-o"></i> Usuario ya existe!');
+                    break;
+                case 3: //correo y usuario repetidos
+                    $('#form-group').addClass('has-error');
+                    $('#form-group .control-label').html('<i class="fa fa-times-circle-o"></i> Usuario ya existe!');
+                    $('#form-group2').addClass('has-error');
+                    $('#form-group2 .control-label').html('<i class="fa fa-times-circle-o"></i> Correo ya existe!');
+                    break;
+                case 0: rpta= 1; break;
+            }//end switch
+        }
+     });*/
   }
 
   function AgregarEditar(AE){

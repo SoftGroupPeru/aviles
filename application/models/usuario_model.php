@@ -21,7 +21,37 @@ Class Usuario_model extends CI_Model {
    $this -> db -> select('idUsuario, usuario, clave');
    $this -> db -> from('Usuario');
    $this -> db -> where('usuario', $username);
-   $this -> db -> where('clave', $password);
+   $this -> db -> where('clave', MD5($password));
+   $this -> db -> limit(1);
+
+   $query = $this -> db -> get();
+
+   if ($query -> num_rows() == 1) {
+     return $query->result();
+   } else {
+     return false;
+   }
+ }
+
+ function verifica_user($username) {
+   $this -> db -> select('usuario');
+   $this -> db -> from('Usuario');
+   $this -> db -> where('usuario', $username);
+   $this -> db -> limit(1);
+
+   $query = $this -> db -> get();
+
+   if ($query -> num_rows() == 1) {
+     return $query->result();
+   } else {
+     return false;
+   }
+ }
+
+ function verifica_correo($correo) {
+   $this -> db -> select('usuario');
+   $this -> db -> from('Usuario');
+   $this -> db -> where('correo', $correo);
    $this -> db -> limit(1);
 
    $query = $this -> db -> get();
