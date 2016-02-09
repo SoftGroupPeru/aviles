@@ -42,7 +42,7 @@ $(document).ready(function() {
                 "<td>"+data.imagen+"</td>"+
                 "<td>"+data.descripcion+"</td>"+
                 "<td>"+estadohtml+"</td>"+
-                '<td><button type="button" title="Editar" onclick="Cargar('+data.idUsuario+')" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> </td>';
+                '<td><button type="button" title="Editar" onclick="Cargar('+data.idMarca+')" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> </td>';
             html+="</tr>";
         });
         $("#tb_marcas").html(html);
@@ -60,7 +60,7 @@ $(document).ready(function() {
 
 
       function validar(){
-        if($("#txt_marca").val() == "" || $("#txt_descripcion").val() == ""){
+        if($("#txt_marca").val() == ""){
           return false;
         } else {
           return true;
@@ -84,7 +84,7 @@ $(document).ready(function() {
                 dataType    : 'json',
                 data        : datos,
                 beforeSend : function() {
-                    $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
+                $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
                 },
                 success : function(data) {
                     $(".overlay,.loading-img").remove();
