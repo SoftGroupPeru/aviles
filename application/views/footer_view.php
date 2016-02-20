@@ -104,7 +104,9 @@
     for ($i=0; $i < count($script); $i++) {
       echo $script[$i];
     }
-  } ?>
+  } ?> 
+
+
 
 <script src="<?php echo $url; ?>dist/js/custom.js"></script>
 <script>

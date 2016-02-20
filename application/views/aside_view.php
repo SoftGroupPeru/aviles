@@ -31,6 +31,9 @@
         <li class="active"><a href="<?php echo $url;?>marca">
             <i class="fa fa-bookmark"></i><span>Marcas</span></a>
         </li>
+        <li class="active"><a href="<?php echo $url;?>producto">
+            <i class="fa fa-book"></i><span>Productos</span></a>
+        </li>
         <li class="header">Navegacion</li>
         <li class="active">
           <a href="#">

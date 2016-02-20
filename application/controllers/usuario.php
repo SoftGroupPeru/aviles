@@ -44,7 +44,7 @@ class Usuario extends CI_Controller {
 			$data['usuario'] = $this->input->post('usuario');
 			$data['pass'] = $this->input->post('pass');
 			$data['nombre'] = $this->input->post('nombre');
-      $data['apellido'] = $this->input->post('apellido');
+      		$data['apellido'] = $this->input->post('apellido');
 			$data['correo'] = $this->input->post('correo');
 			$data['estado'] = $this->input->post('estado');
 
