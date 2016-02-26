@@ -9,19 +9,15 @@
                 <h4 class="modal-title">Producto</h4>
             </div>
             <div class="modal-body">
-                <form id="form_productos" name="form_productos" method="post" enctype="multipart/form-data" ><!--class="form-inline" role="form"-->
-                    
+                <form id="form_productos" name="form_productos" method="post" enctype="multipart/form-data" ><!--class="form-inline" role="form"-->                    
                     <div class="form-group">
                         <label class="control-label">Nombre Producto</label>
                         <input type="text" class="form-control" placeholder="Ingrese Nombre" name="txt_nombre" id="txt_nombre">
-
                     </div>
                     <div class="form-group">
                         <label class="control-label">Codigo de Barra ##||</label>
                         <input type="text" class="form-control" placeholder="codigo de barra" name="txt_codbarra" id="txt_codbarra">
-
                     </div>
-
                      <div class="form-group">
                         <label class="control-label">Serie</label>
                         <input type="text" class="form-control" placeholder="Ingrese serie" name="txt_serie" id="txt_serie">
@@ -42,8 +38,7 @@
                         <label class="control-label">Descripcion</label>
                         
                         <textarea placeholder="Descripcion" id="txt_descripcion" name="txt_descripcion" class="form-control" rows="3"></textarea>
-                    </div>
-                    
+                    </div>                    
                     <div class="form-group">
                         <!-- Content Header (Page header) -->
                         <label class="control-label" >Subir Imagen</label> 
@@ -52,7 +47,6 @@
                             <input name="archivo" type="file" id="imagen" />
                              <div class="showImage"></div>   
                     </div>
-
                    <div class="form-group">
                         <label class="control-label">Estado:
                         </label>
@@ -67,29 +61,18 @@
                         <select class="form-control" name="slct_marca" id="slct_marca">                            
                         </select>
                     </div>
-
                     <div class="form-group" >
                         <label><input id="cheknuevo" name="chek_producto" type="radio" value="pnuevo" checked="checked"  > Producto Nuevo </label>
-                        <label><input id="chekseminuevo" name="chek_producto" type="radio" value="pseminuevo" > Producto Semi-Nuevo </label>                       
-
+                        <label><input id="chekseminuevo" name="chek_producto" type="radio" value="pseminuevo" > Producto Semi-Nuevo </label>
                     </div>
-
                     <input type="hidden" name="txt_id" id="txt_id">
-                    
-
                 </form>
             </div>
-            <div class="modal-footer">
-                <input type="button" id="AgregarEditar" class="btn btn-primary" value="guardar"></input>
-                <input type="hidden" id="submit" value="0"></input> 
-
-
+            <div class="modal-footer">                
+                <input type="hidden" id="submit" value="0"></input>
                 <button type="button" class="btn btn-default" data-dismiss="modal" >Cerrar</button>
-                <!--<button type="button" id="submit" class="btn btn-primary" value="0" onclick="AgregarEditar(this.value)">Guardar</button>-->
-
-               
-
-
+                <input type="button" id="AgregarEditar" class="btn btn-primary" value="Guardar"></input>
+            <!--<button type="button" id="submit" class="btn btn-primary" value="0" onclick="AgregarEditar(this.value)">Guardar</button>-->
             </div>
         </div>
     </div>

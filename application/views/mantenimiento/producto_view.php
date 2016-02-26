@@ -12,7 +12,6 @@
             <li class="active">Producto</li>
           </ol>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -24,42 +23,50 @@
                   <button type="button" class="btn btn-primary" onclick="Nuevo()">
                     <i class="fa fa-user-plus"></i> Agregar
                   </button>
-
-
-                  <button type="button" class="btn btn-primary" onclick="AgregarEditar()">
-                    <i class="fa fa-user-plus"></i> datos Obtenidos ajax
-                  </button>
-
                 </div><!-- /.box-header -->
                 <div class="box-body">
-
-                  <!--<table id="t_marcas" class="table table-bordered table-striped">
+                 <table id="t_producto" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>Nro</th>
-                        <th>Marca</th>
-                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Cod. Barra</th>
+                        <th>Stock</th>
+                        <th>Serie</th>
+                        <th>Parte</th>
+                        <th>Cantidad</th>
+                        <th>Ubicacion</th>
                         <th>Descripcion</th>
+                        <th>Imagen</th>
                         <th>Estado</th>
-                        <th>Opciones</th>
+                        <th>Marca</th>
+                        <th>P. Nuevo</th>
+                        <th>P. Semi Nuevo</th>
+                        <th>Obsiones</th>
                       </tr>
                     </thead>
-                    <tbody id="tb_marcas">
-
-
-
+                    <tbody id="tb_producto">
                     </tbody>
                     <tfoot>
                       <tr>
                         <th>Nro</th>
-                        <th>Marca</th>
-                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Cod. Barra</th>
+                        <th>Stock</th>
+                        <th>Serie</th>
+                        <th>Parte</th>
+                        <th>Cantidad</th>
+                        <th>Ubicacion</th>
                         <th>Descripcion</th>
+                        <th>Imagen</th>
                         <th>Estado</th>
-                        <th>Opciones</th>
+                        <th>Marca</th>
+                        <th>P. Nuevo</th>
+                        <th>P. Semi Nuevo</th>
+                        <th>Obsiones</th>
                       </tr>
                     </tfoot>
-                  </table>-->
+                  </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
