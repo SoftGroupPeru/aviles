@@ -128,13 +128,12 @@ Class Producto extends CI_Controller{
             $id = $this->input->post('id');
 
            $data = $this->Producto->Cargar($id);
-           echo json_encode($data);
-          
+           echo json_encode($data);          
         }
     }
 
     public function editar()
-    {       
+    {   
         if ($this->input->is_ajax_request()){     
                 $data['id'] = $this->input->post('txt_id');  
                 $data['nombre'] = $this->input->post('txt_nombre');
@@ -157,8 +156,7 @@ Class Producto extends CI_Controller{
 
                     if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') 
                     {
-                        //obtenemos el archivo a subir                       
-                        
+                        //obtenemos el archivo a subir   
                         $nombre = substr($file, 0, -4) ;
                         $num_caract = strlen($nombre);                    
                         $nombre_img = strtolower($this->input->post('txt_img'));
@@ -166,26 +164,32 @@ Class Producto extends CI_Controller{
 
                         //comprobamos si existe un directorio para subir el archivo
                         //si no es así, lo creamos
-                        if(!is_dir("images/productos/")) { mkdir("images/productos", 0777,true); }   
+                        if(!is_dir("images/productos/")) { mkdir("images/productos", 0777,true); }
 
-                        if (is_file("images/productos/".$nombre_img.$ext))  {                            
-                            $num_repit = count($this->Producto->buscarnombreimg($nombre_img)) ; 
-                            $data['img'] = $nombre_img.$num_repit.$ext ;
-
-                            //--borrar imagen anterior
-                            $img_ant = $this->Producto->buscarimgant($data['id']) ;                             
-                            unlink("images/productos/".$img_ant->imagen);
-                            move_uploaded_file($_FILES['archivo']['tmp_name'],"images/productos/".$nombre_img.$num_repit.$ext) ;
-                            
-                        }else{
-                            $data['img'] = $nombre_img.$ext ;
+                        if ($file == "") {
+                            //-- NO SE EDITARA IMAGN  - NO CREAR Y NO ELIMINAR
                             $img_ant = $this->Producto->buscarimgant($data['id']) ; 
-                            //print_r($img_ant) ;
+                            $data['img'] = $img_ant->imagen ;
+                        }else{
 
-                            unlink("images/productos/".$img_ant->imagen);
-                            move_uploaded_file($_FILES['archivo']['tmp_name'],"images/productos/".$nombre_img.$ext) ;
-                        }  
+                            if (is_file("images/productos/".$nombre_img.$ext))  {  
+                                    
+                                    $num_repit = count($this->Producto->buscarnombreimg($nombre_img)) ; 
+                                    $data['img'] = $nombre_img.$num_repit.$ext ;
+                                    //--borrar imagen anterior
+                                    $img_ant = $this->Producto->buscarimgant($data['id']) ;                             
+                                    unlink("images/productos/".$img_ant->imagen);
+                                    move_uploaded_file($_FILES['archivo']['tmp_name'],"images/productos/".$nombre_img.$num_repit.$ext) ;
+                                    
+                                }else{
+                                    $data['img'] = $nombre_img.$ext ;
+                                    $img_ant = $this->Producto->buscarimgant($data['id']) ; 
+                                    //print_r($img_ant) ;
 
+                                    unlink("images/productos/".$img_ant->imagen);
+                                    move_uploaded_file($_FILES['archivo']['tmp_name'],"images/productos/".$nombre_img.$ext) ;
+                                }  
+                        }
                     }
                     else{
                        throw new Exception("Error Processing Request", 1);   
@@ -209,6 +213,7 @@ Class Producto extends CI_Controller{
             }
                 echo json_encode($data);
         } 
+        
     }
 
 

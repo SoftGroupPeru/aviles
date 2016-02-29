@@ -21,8 +21,10 @@ $(document).ready(function(){
 
 
     $("#AgregarEditar").click(function(){
-        if (validar()){
-                var AE = $("#submit").val() ;               
+        var AE = $("#submit").val() ;
+        var activarfile = $("#activarfile").val() ;
+        if (validar(AE,activarfile)){
+               // var AE = $("#submit").val() ;               
                 var accion="producto/crear";
                 if(AE==1){
                     accion="producto/editar";                    
@@ -55,7 +57,7 @@ $(document).ready(function(){
                              $.each(data.msj,function(index,datos){
                                     mensaje('error', data.msj);
                              });
-                         } 
+                         }                          
                   }
                 });
         }else{
@@ -107,11 +109,24 @@ function tipo_marca() {
 	});
 }
 
-function validar(){
+function validar(AE,activarfile){
     //faltan campos requeridos
-    if($("#txt_nombre").val() == "" || $("#txt_codbarra").val() == "" || $("#txt_serie").val() == "" || $("#txt_parte").val() == "" || $("#txt_cantidad").val() == "" || $("#txt_ubicacion").val() == "" || $("#txt_descripcion").val() == "" || $("#txt_imagen").val() == "" || $("#imagen").val() == "") {
-      return false;
-    }    
+    if (AE==1) {
+      if (activarfile==1){
+        if($("#txt_nombre").val() == "" || $("#txt_codbarra").val() == "" || $("#txt_serie").val() == "" || $("#txt_parte").val() == "" || $("#txt_cantidad").val() == "" || $("#txt_ubicacion").val() == "" || $("#txt_descripcion").val() == "" || $("#txt_img").val() == "" || $("#imagen").val() == ""){
+        return false;
+        }
+      }else{
+            if($("#txt_nombre").val() == "" || $("#txt_codbarra").val() == "" || $("#txt_serie").val() == "" || $("#txt_parte").val() == "" || $("#txt_cantidad").val() == "" || $("#txt_ubicacion").val() == "" || $("#txt_descripcion").val() == "" || $("#txt_img").val() == "") {
+            return false;
+            }
+        }
+    }else{
+        if($("#txt_nombre").val() == "" || $("#txt_codbarra").val() == "" || $("#txt_serie").val() == "" || $("#txt_parte").val() == "" || $("#txt_cantidad").val() == "" || $("#txt_ubicacion").val() == "" || $("#txt_descripcion").val() == "" || $("#txt_img").val() == "" || $("#imagen").val() == "") {
+        return false;
+        }    
+    }      
+           
     return true;
 }
 
@@ -154,13 +169,13 @@ function HTMLCargarProducto(datos){
             "<td>"+con+"</td>"+
             "<td>"+data.nombre+"</td>"+
             "<td>"+data.codigo_barra+"</td>"+
-            "<td>"+data.stock+"</td>"+
+            //"<td>"+data.stock+"</td>"+
             "<td>"+data.serie+"</td>"+
             "<td>"+data.parte+"</td>"+
             "<td>"+data.cantidad+"</td>"+
             "<td>"+data.ubicacion+"</td>"+
             "<td>"+data.descripcion+"</td>"+
-            "<td>"+data.imagen+"</td>"+
+            "<td><img width='90px' src='"+url+"images/productos/"+data.imagen+"'></td>"+
             "<td>"+estadohtml+"</td>"+
             "<td>"+data.Marca_idMarca+"</td>"+
             "<td>"+data.producto_nuevo+"</td>"+            
@@ -177,6 +192,14 @@ function Cargar(id){
     $('#productoModal').modal('show');
     $('#productoModal').find('.modal-title').text('Editar Producto');
     $("#AgregarEditar").val('Editar');
+    $("#activarfile").val('0');
+    $("#imagen").val('');
+    $("#imagen").hide();
+    $("#txt_img").change(function(){
+         $("#imagen").show();
+         $("#activarfile").val('1');
+    });   
+
     $("#submit").val('1');
 
     $.ajax({
@@ -212,7 +235,7 @@ function CambiarEstadoProducto(id,estado){
             cache       : false,
             dataType    : 'json',
             data        : {id:id,estado: estado},
-            beforeSend : function() {
+            beforeSend : function() {   
                 $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
             },
             success : function(obj) {

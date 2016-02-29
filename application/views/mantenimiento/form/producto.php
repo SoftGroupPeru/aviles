@@ -70,6 +70,7 @@
             </div>
             <div class="modal-footer">                
                 <input type="hidden" id="submit" value="0"></input>
+                <input type="hidden" id="activarfile" value="0"></input>
                 <button type="button" class="btn btn-default" data-dismiss="modal" >Cerrar</button>
                 <input type="button" id="AgregarEditar" class="btn btn-primary" value="Guardar"></input>
             <!--<button type="button" id="submit" class="btn btn-primary" value="0" onclick="AgregarEditar(this.value)">Guardar</button>-->

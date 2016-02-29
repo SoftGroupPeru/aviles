@@ -29,9 +29,10 @@ class Producto_model extends CI_Model
           return $resultado;
       }
 
-      public function Listar(){
-        $this->db->select('idProducto,nombre,codigo_barra,stock,serie,parte,cantidad,ubicacion,descripcion,imagen,estado,Marca_idMarca,producto_nuevo,producto_seminuevo');
-        $this->db->from('producto');
+      public function Listar(){        
+        $this->db->select('p.idProducto,p.nombre,p.codigo_barra,p.stock,p.serie,p.parte,p.cantidad,p.ubicacion,p.descripcion,p.imagen,p.estado,m.nombre Marca_idMarca,p.producto_nuevo,p.producto_seminuevo');
+        $this->db->from('producto p');
+        $this->db->join('marca m', 'm.idMarca = p.Marca_idMarca');
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado ;

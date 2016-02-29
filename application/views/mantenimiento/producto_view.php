@@ -31,7 +31,7 @@
                         <th>Nro</th>
                         <th>Nombre</th>
                         <th>Cod. Barra</th>
-                        <th>Stock</th>
+                        <!--<th>Stock</th>-->
                         <th>Serie</th>
                         <th>Parte</th>
                         <th>Cantidad</th>
@@ -52,7 +52,7 @@
                         <th>Nro</th>
                         <th>Nombre</th>
                         <th>Cod. Barra</th>
-                        <th>Stock</th>
+                        <!--<th>Stock</th>-->
                         <th>Serie</th>
                         <th>Parte</th>
                         <th>Cantidad</th>
