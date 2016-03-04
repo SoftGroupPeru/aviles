@@ -11,8 +11,8 @@ Class Marca_model extends CI_Model {
 
   public function Insertar($data){
     $arr = array(
-               'marca' => $data['nombre'],
-               'imagen' => $data['imagen'],
+               'nombre' => $data['nombre'],
+               'imagen' => $data['img'],
                'descripcion' => $data['descripcion'],
                'estado' => $data['estado'],
             );
@@ -20,8 +20,27 @@ Class Marca_model extends CI_Model {
     else return false;
   }
 
+  public function buscarnombreimg($nombre_img){
+          $this->db->select('imagen');
+          $this->db->from('marca');
+          $this->db->like('imagen',$nombre_img);   
+          $consulta = $this->db->get();
+          $resultado = $consulta->result();
+          return $resultado;
+  }
+
+  public function buscarimgant($id){
+         $this->db->select('imagen');
+         $this->db->from('marca');
+         $this->db->where('idMarca',$id);
+         $this->db->limit(1);
+         $consulta = $this->db->get();
+         $resultado = $consulta->row();
+         return $resultado;
+  }
+
   public function Cargar($id){
-    $this->db->select('idMarca, nombre , descripcion, estado');
+    $this->db->select('idMarca, nombre ,imagen, descripcion, estado');
     $this->db->from('marca');
     $this->db->where('idMarca', $id);
     $this->db->limit(1);
@@ -34,6 +53,7 @@ Class Marca_model extends CI_Model {
 
     $arr = array(
           'nombre' => $data['nombre'],
+          'imagen' => $data['img'],
           'descripcion' => $data['descripcion'],
           'estado' => $data['estado']
          );

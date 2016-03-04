@@ -38,28 +38,6 @@
                       </tr>
                     </thead>
                     <tbody id="tb_marcas">
-
-
-
-                      <?php
-                      /*$i = 1;
-          					  foreach($arr_usuarios as $usuario) {
-          						//  $fecha = date('d-m-Y', strtotime( $usuario->fecha_creacion));
-                        if(($usuario->estado) == 1) $estado = '<button class="btn btn-block btn-success btn-sm" onclick="activardesactivar('.$usuario->idUsuario.', '.$usuario->estado.')">Activado</button>';
-                        else $estado = '<button class="btn btn-block btn-danger btn-sm" onclick="activardesactivar('.$usuario->idUsuario.', '.$usuario->estado.')">Inactivo</button>';
-                        echo '<tr>';
-                        echo '<td>'.$i.'</td>';
-                        echo '<td>'.$usuario->usuario.'</td>';
-                        echo '<td>'.$usuario->correo.'</td>';
-                        echo '<td>'.$usuario->nombre.'</td>';
-                        echo '<td>'.$usuario->apellido.'</td>';
-                        echo '<td>'.$estado.'</td>';
-                        echo '<td><button type="button" title="Editar" onclick="Cargar('.$usuario->idUsuario.')" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button> ';
-                        echo '</td>';
-                        echo '</tr>';
-                        $i++;
-                      }*/
-                    ?>
                     </tbody>
                     <tfoot>
                       <tr>

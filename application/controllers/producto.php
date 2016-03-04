@@ -184,9 +184,9 @@ Class Producto extends CI_Controller{
                                 }else{
                                     $data['img'] = $nombre_img.$ext ;
                                     $img_ant = $this->Producto->buscarimgant($data['id']) ; 
-                                    //print_r($img_ant) ;
-
-                                    unlink("images/productos/".$img_ant->imagen);
+                                    if (is_file("images/productos/".$img_ant->imagen)) {
+                                      unlink("images/productos/".$img_ant->imagen);
+                                    }
                                     move_uploaded_file($_FILES['archivo']['tmp_name'],"images/productos/".$nombre_img.$ext) ;
                                 }  
                         }

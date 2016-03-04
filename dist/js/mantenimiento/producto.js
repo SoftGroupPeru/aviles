@@ -91,6 +91,7 @@ function Nuevo(){
     $("#txt_descripcion").val('');
     $("#txt_img").val('');
     $("#imagen").val('');
+    $("#imagen").show();
     $('#productoModal').find('.modal-title').text('Nuevo Producto');
     $('#productoModal').modal('show');
 }
@@ -165,6 +166,11 @@ function HTMLCargarProducto(datos){
         if(data.estado==1){
             estadohtml='<span id="'+data.idProducto+'" onClick="CambiarEstadoProducto('+data.idProducto+','+data.estado+')" class="btn btn-success btn-sm">Activo</span>';
         }
+        if (data.imagen==null) {
+            var conten_imagen = "<i class='fa fa-warning'></i>" ;              
+        }else{
+            var conten_imagen = "<img title='"+data.imagen+"' width='90px' src='"+url+"images/productos/"+data.imagen+"'>" ;   
+        }
          html+="<tr>"+
             "<td>"+con+"</td>"+
             "<td>"+data.nombre+"</td>"+
@@ -175,7 +181,7 @@ function HTMLCargarProducto(datos){
             "<td>"+data.cantidad+"</td>"+
             "<td>"+data.ubicacion+"</td>"+
             "<td>"+data.descripcion+"</td>"+
-            "<td><img width='90px' src='"+url+"images/productos/"+data.imagen+"'></td>"+
+            "<td>"+conten_imagen+"</td>"+
             "<td>"+estadohtml+"</td>"+
             "<td>"+data.Marca_idMarca+"</td>"+
             "<td>"+data.producto_nuevo+"</td>"+            
@@ -208,9 +214,12 @@ function Cargar(id){
             cache       : false,
             dataType    : 'json',
             data        : {id: id},
-            success : function(data){
-                               
-                    var str = data.imagen ;
+            success : function(data){                               
+                    if (data.imagen==null) {
+                        var str = '.' ;    
+                    }else{
+                        var str = data.imagen ;
+                    }                    
                     var myarr = str.split(".");
                     var imagen = myarr[0] ;                   
 

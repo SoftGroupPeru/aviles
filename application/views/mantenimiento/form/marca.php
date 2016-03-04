@@ -19,8 +19,12 @@
                         <input type="text" class="form-control" placeholder="Ingrese marca" name="txt_marca" id="txt_marca">
                     </div>
                     <div class="form-group">
-                      <label class="control-label">Imagen</label>
-                      <!--<input type="text" class="form-control" placeholder="Ingrese Imagen" name="txt_apellido" id="txt_apellido"> -->
+                        <!-- Content Header (Page header) -->
+                        <label class="control-label" >Subir Imagen</label> 
+                            <input type="text" class="form-control" placeholder="Titulo imagen" name="txt_img" id="txt_img"><br>
+                            <!--<label class="control-label">Imagen 1:</label>-->
+                            <input name="archivo" type="file" id="imagen" />
+                             <div class="showImage"></div>   
                     </div>
                     <div class="form-group">
                       <label class="control-label">Descripcion</label>
@@ -38,8 +42,12 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="submit" class="btn btn-primary" value="0" onclick="AgregarEditar(this.value)">Guardar</button>
+                <input type="hidden" id="submit" value="0"></input>
+                <input type="hidden" id="activarfile" value="0"></input>
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                
+                <input type="button" id="AgregarEditar" class="btn btn-primary" value="Guardar"></input>
+                <!--<button type="button" id="submit" class="btn btn-primary" value="0" onclick="AgregarEditar(this.value)">Guardar</button>-->
             </div>
         </div>
     </div>

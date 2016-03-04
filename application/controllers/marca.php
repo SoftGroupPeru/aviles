@@ -43,18 +43,55 @@ class Marca extends CI_Controller {
 	public function crear()
 	{
 		if($this->input->is_ajax_request()){
-			$data['nombre'] = $this->input->post('nombre');
-			$data['imagen'] = $this->input->post('imagen');
-			$data['descripcion'] = $this->input->post('descripcion');
-			$data['estado'] = $this->input->post('estado');
+			$data['nombre'] = $this->input->post('txt_marca');			
+			$data['descripcion'] = $this->input->post('txt_descripcion');
+			$data['estado'] = $this->input->post('slct_estado');
 
-			if($this->Marca->Insertar($data)) {
-				$data['rst'] = 1;
-				$data['msj'] = 'Marca registrada correctamente';
-			} else {
-				$data['rst'] = 0;
-				$data['msj'] = 'Ocurrio un error en el registro de la marca';
-			}
+			$file = $_FILES['archivo']['name'];
+            $peso = $_FILES['archivo']['size'];
+
+            if ($peso >= 1000000) {
+                    $data['peso'] = 1 ;
+                    $data['msj'] = 'Imagen supera el peso';
+                } else {
+
+                    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') 
+                    {
+                        //obtenemos el archivo a subir                       
+                        
+                        $nombre = substr($file, 0, -4) ;
+                        $num_caract = strlen($nombre);                    
+                        $nombre_img = strtolower($this->input->post('txt_img'));
+                        $ext = substr($file, $num_caract, 6) ;     
+
+                        //comprobamos si existe un directorio para subir el archivo
+                        //si no es así, lo creamos
+                        if(!is_dir("images/marcas/")) { mkdir("images/marcas", 0777,true); }   
+
+                        if (is_file("images/marcas/".$nombre_img.$ext))  {                            
+                            $num_repit = count($this->Marca->buscarnombreimg($nombre_img)) ; 
+                            $data['img'] = $nombre_img.$num_repit.$ext ;
+                               
+                            move_uploaded_file($_FILES['archivo']['tmp_name'],"images/marcas/".$nombre_img.$num_repit.$ext) ;
+                        }else{
+                            $data['img'] = $nombre_img.$ext ;
+                            move_uploaded_file($_FILES['archivo']['tmp_name'],"images/marcas/".$nombre_img.$ext) ;
+                        }                        
+                    }
+                    else{
+                       throw new Exception("Error Processing Request", 1);   
+                    }
+                    
+
+                    if($this->Marca->Insertar($data)) {
+                    $data['rst'] = 1;
+                    $data['msj'] = 'Marca registrado correctamente';
+                    } else {
+                    $data['rst'] = 0;
+                    $data['msj'] = 'Ocurrio un error en el registro de Marca';
+                    }
+            }
+           
 			echo json_encode($data);
 		}
 	}
@@ -62,19 +99,68 @@ class Marca extends CI_Controller {
 	public function editar()
 	{
 		if($this->input->is_ajax_request()){
-			$data['id'] = $this->input->post('id');
-			$data['nombre'] = $this->input->post('nombre');
-			$data['descripcion'] = $this->input->post('descripcion');
-			$data['estado'] = $this->input->post('estado');
+			$data['id'] = $this->input->post('txt_id');
+			$data['nombre'] = $this->input->post('txt_marca');
+			$data['descripcion'] = $this->input->post('txt_descripcion');
+			$data['estado'] = $this->input->post('slct_estado');
 
-			if($this->Marca->Editar($data)) {
-				$data['rst'] = 1;
-				$data['msj'] = 'Usuario actualizado correctamente';
-				$data['msj'] = $this->db->last_query();
-			} else {
-				$data['rst'] = 0;
-				$data['msj'] = 'Ocurrio un error en la actualización';
-			}
+			$file = $_FILES['archivo']['name'];
+            $peso = $_FILES['archivo']['size'];
+
+            if ($peso >= 1000000) {
+                    $data['peso'] = 1 ;
+                    $data['msj'] = 'Imagen supera el peso';
+                } else {
+
+                    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') 
+                    {
+                        //obtenemos el archivo a subir   
+                        $nombre = substr($file, 0, -4) ;
+                        $num_caract = strlen($nombre);                    
+                        $nombre_img = strtolower($this->input->post('txt_img'));
+                        $ext = substr($file, $num_caract, 6) ;     
+
+                        //comprobamos si existe un directorio para subir el archivo
+                        //si no es así, lo creamos
+                        if(!is_dir("images/marcas/")) { mkdir("images/marcas", 0777,true); }
+
+                        if ($file == "") {
+                            //-- NO SE EDITARA IMAGN  - NO CREAR Y NO ELIMINAR
+                            $img_ant = $this->Marca->buscarimgant($data['id']) ; 
+                            $data['img'] = $img_ant->imagen ;
+                        }else{
+
+                            if (is_file("images/marcas/".$nombre_img.$ext))  {  
+                                    
+                                    $num_repit = count($this->Marca->buscarnombreimg($nombre_img)) ; 
+                                    $data['img'] = $nombre_img.$num_repit.$ext ;
+                                    //--borrar imagen anterior
+                                    $img_ant = $this->Marca->buscarimgant($data['id']) ;                             
+                                    unlink("images/marcas/".$img_ant->imagen);
+                                    move_uploaded_file($_FILES['archivo']['tmp_name'],"images/marcas/".$nombre_img.$num_repit.$ext) ;                                    
+                                }else{
+                                    $data['img'] = $nombre_img.$ext ;
+                                    $img_ant = $this->Marca->buscarimgant($data['id']) ; 
+                                    //print_r($img_ant) ;
+                                    if (is_file("images/marcas/".$img_ant->imagen)) {
+                                        unlink("images/marcas/".$img_ant->imagen);
+                                    }                                    
+                                    move_uploaded_file($_FILES['archivo']['tmp_name'],"images/marcas/".$nombre_img.$ext) ;
+                                }  
+                        }
+                    }
+                    else{
+                       throw new Exception("Error Processing Request", 1);   
+                    }                    
+
+                    if($this->Marca->Editar($data)) {
+                    $data['rst'] = 1;
+                    $data['msj'] = 'Marca actualizado correctamente';
+                    } else {
+                    $data['rst'] = 0;
+                    $data['msj'] = 'Ocurrio un error en la actualizacion del Marca';
+                    }
+            }
 			echo json_encode($data);
 		}
 	}
